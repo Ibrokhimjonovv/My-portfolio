@@ -1,0 +1,119 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <!-- Bootstarp -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+    <aside>
+        {% for object in objects %}
+            <div class="img-container">
+                <img src="{{object.profile_image.url}}" alt="">
+            </div>
+            <div class="name">
+                <h1>{{object.user}}</h1>
+            </div>
+        {% endfor %}
+        {% for detal in detals %}
+            <div class="detals">
+                <p><i class="bi bi-briefcase-fill"></i>{{detal.direction}}</p>
+                <p><i class="bi bi-house-door-fill"></i>{{detal.location}}</p>
+                <p><i class="bi bi-envelope-fill"></i> <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank">{{detal.mail}}</a></p>
+                <p><i class="bi bi-telephone-fill"></i> <a href="tel:{{detal.tel}}">{{detal.tel}}</a></p>
+            </div>
+        {% endfor %}
+        <hr>
+
+        <h3><i class="bi bi-asterisk"></i> Skills</h3>
+
+        {% for skill in skills %}
+            
+            <div class="container">
+                <div class="skill-box">
+                    <span class="title">{{skill.direction_name}}</span>
+
+                    <div class="skill-bar">
+                        <span class="skill-per {{skill.class_name}}">
+                            <span class="tooltip">{{skill.percent}}%</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <h3><i class="bi bi-globe-asia-australia"></i> Languages</h3>
+
+        {% for language in languages %}
+            <div class="container-languages">
+                <div class="language-box">
+                    <span class="language-title">{{language.language_name}}</span>
+
+                    <div class="language-bar">
+                        <span class="language-per {{language.class_name}}">
+                            <!-- <span class="languagetip">30%</span> -->
+                        </span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </aside>
+    <section>
+        <h1 class="work-experience">
+            <i class="bi bi-suitcase-lg-fill"></i> Work Experience
+        </h1>
+        {% for work in workexperince %}
+            <div class="about-work-experience">
+                <div class="company">
+                    <p>
+                        {{work.direction}} / <span style="text-decoration: underline;"><a href="{{work.company_link}}" target="_blank">{{work.company}}</a></span>
+                    </p>
+                </div>
+                <div class="date-about">
+                    <p><i class="bi bi-calendar"></i> {{work.date_time}}</p>
+                    <p>{{work.about}}</p>
+                </div>
+                <hr>
+            </div>
+        {% endfor %} 
+    </section>
+    <section>
+        <h1 class="education">
+            <i class="bi bi-patch-check-fill"></i> Education
+        </h1>
+        {% for education in educations %}
+            <div class="about-work-experience">
+                <div class="company">
+                    <p>
+                        <span style="text-decoration: underline;"><a href="{{education.education_link}}" target="_blank">{{education.education}}</a></span>
+                    </p>
+                </div>
+                <div class="date-about">
+                    <p><i class="bi bi-calendar"></i>{{education.date_time}}</p>
+                    <p>{{education.about}}</p>
+                </div>
+                <hr>
+            </div>
+        {% endfor %}
+        
+    </section>
+    <footer>
+        {% for footer in footers %}
+            <p>Find me on social media.</p>
+            {% for icon in icons %}
+                <a href="{{icon.social_icons_link}}" target="_blank"><i class="{{icon.social_icons}}"></i></a>
+            {% endfor %}
+            <p>Powered by <a href="{{footer.company_link}}" target="_blank">{{footer.company}}</a></p>
+            <hr>
+            <p>
+                {{footer.hashtags}}
+            </p>
+        {% endfor %}
+    </footer>
+</body>
+</html>
